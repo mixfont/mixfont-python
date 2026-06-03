@@ -28,7 +28,6 @@ class Mixfont:
         self,
         api_key: str,
         *,
-        base_url: str = DEFAULT_BASE_URL,
         timeout: float = 30.0,
     ) -> None:
         api_key = api_key.strip()
@@ -37,7 +36,7 @@ class Mixfont:
             raise MixfontError("A Mixfont API key is required.")
 
         self._api_key = api_key
-        self._base_url = base_url.rstrip("/")
+        self._base_url = DEFAULT_BASE_URL
         self._timeout = timeout
         self.generations = GenerationsClient(self)
 
@@ -90,7 +89,6 @@ class GenerationsClient:
         prompt: Optional[str] = None,
         image_url: Optional[str] = None,
         glyph_set: Optional[str] = None,
-        font_name: Optional[str] = None,
     ) -> JsonObject:
         has_prompt = _has_text(prompt)
         has_image_url = _has_text(image_url)
@@ -109,9 +107,6 @@ class GenerationsClient:
 
         if glyph_set is not None:
             body["glyph_set"] = glyph_set
-
-        if font_name is not None:
-            body["font_name"] = font_name
 
         return self._client._request("POST", path, body=body)
 

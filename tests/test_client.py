@@ -4,6 +4,8 @@ from unittest.mock import patch
 
 from mixfont import Mixfont, MixfontGenerationError
 
+DEFAULT_BASE_URL = "https://api.mixfont.com/v1"
+
 
 def api_generation(**overrides):
     created_at = overrides.pop("created_at", "2026-06-02T00:00:00.000Z")
@@ -52,23 +54,22 @@ class MixfontClientTest(unittest.TestCase):
             calls.append((request, timeout))
             return FakeResponse(
                 api_generation(
-                    poll_url="https://api.test/v1/font-generations/gen_123",
+                    poll_url=f"{DEFAULT_BASE_URL}/font-generations/gen_123",
                 )
             )
 
         with patch("mixfont.client.urlopen", fake_urlopen):
-            client = Mixfont("test-key", base_url="https://api.test/v1")
+            client = Mixfont("test-key")
             generation = client.generations.create(
                 prompt="A condensed sci-fi display font",
                 glyph_set="extended",
-                font_name="Demo",
             )
 
         request, timeout = calls[0]
 
         self.assertEqual(
             request.full_url,
-            "https://api.test/v1/font-generations/text",
+            f"{DEFAULT_BASE_URL}/font-generations/text",
         )
         self.assertEqual(request.get_method(), "POST")
         self.assertEqual(timeout, 30.0)
@@ -77,7 +78,6 @@ class MixfontClientTest(unittest.TestCase):
             {
                 "prompt": "A condensed sci-fi display font",
                 "glyph_set": "extended",
-                "font_name": "Demo",
             },
         )
         self.assertEqual(generation["id"], "gen_123")
@@ -104,12 +104,12 @@ class MixfontClientTest(unittest.TestCase):
             return FakeResponse(api_generation(input_type="image"))
 
         with patch("mixfont.client.urlopen", fake_urlopen):
-            client = Mixfont("test-key", base_url="https://api.test/v1")
+            client = Mixfont("test-key")
             client.generations.create(image_url="https://example.com/reference.png")
 
         self.assertEqual(
             calls[0].full_url,
-            "https://api.test/v1/font-generations/image",
+            f"{DEFAULT_BASE_URL}/font-generations/image",
         )
         self.assertEqual(
             json.loads(calls[0].data.decode("utf-8")),
@@ -120,13 +120,13 @@ class MixfontClientTest(unittest.TestCase):
         def fake_urlopen(request, timeout):
             self.assertEqual(
                 request.full_url,
-                "https://api.test/v1/font-generations/gen_123",
+                f"{DEFAULT_BASE_URL}/font-generations/gen_123",
             )
             self.assertEqual(request.get_method(), "GET")
             return FakeResponse(api_generation())
 
         with patch("mixfont.client.urlopen", fake_urlopen):
-            client = Mixfont("test-key", base_url="https://api.test/v1")
+            client = Mixfont("test-key")
             generation = client.generations.get("gen_123")
 
         self.assertEqual(generation["id"], "gen_123")
@@ -149,7 +149,7 @@ class MixfontClientTest(unittest.TestCase):
             )
 
         with patch("mixfont.client.urlopen", fake_urlopen):
-            client = Mixfont("test-key", base_url="https://api.test/v1")
+            client = Mixfont("test-key")
             generation = client.generations.wait(
                 "gen_123",
                 interval_seconds=0.001,
@@ -180,7 +180,7 @@ class MixfontClientTest(unittest.TestCase):
             )
 
         with patch("mixfont.client.urlopen", fake_urlopen):
-            client = Mixfont("test-key", base_url="https://api.test/v1")
+            client = Mixfont("test-key")
 
             with self.assertRaises(MixfontGenerationError):
                 client.generations.wait(

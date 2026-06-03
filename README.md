@@ -5,7 +5,7 @@
 A Python client for the [Mixfont](https://www.mixfont.com) API. It lets you
 create AI-generated font files from Python applications and scripts.
 
-Mixfont is a frontier AI lab developing generative AI for fonts. The Mixfont font generation model creates complete, web-safe TTF font files from a natural-language prompt or a public reference image, so applications can turn generated lettering, sketches, logos, or visual references into editable type instead of a flat image. Fonts generated via the API are unique and licensed for commercial use.
+Mixfont is a frontier AI lab developing generative AI for fonts. The Mixfont [font generation](https://www.mixfont.com/font-generator) model creates complete, web-safe TTF font files from a natural-language prompt or a public reference image, so applications can turn generated lettering, sketches, logos, or visual references into editable type instead of a flat image. Fonts generated via the API are unique and licensed for commercial use.
 
 For more information, see the [Mixfont website](https://www.mixfont.com) and the [full Mixfont documentation](https://www.mixfont.com/docs).
 
@@ -95,13 +95,12 @@ generation = mixfont.generations.create(
 ### Constructor
 
 ```py
-mixfont = Mixfont(api_key, base_url="https://api.mixfont.com/v1", timeout=30.0)
+mixfont = Mixfont(api_key, timeout=30.0)
 ```
 
 | Argument   | Type    | Description                                              |
 | ---------- | ------- | -------------------------------------------------------- |
 | `api_key`  | `str`   | Required. Mixfont API key.                               |
-| `base_url` | `str`   | Optional. Defaults to `https://api.mixfont.com/v1`.      |
 | `timeout`  | `float` | Optional request timeout in seconds. Defaults to `30.0`. |
 
 ### `mixfont.generations.create(...)`
@@ -113,7 +112,6 @@ Starts a new font generation and returns immediately.
 | `prompt`    | `str`                        | Text prompt for the generated font.           |
 | `image_url` | `str`                        | Public HTTPS URL for a JPEG, PNG, or WebP reference image up to 20 MB. |
 | `glyph_set` | `"standard"` or `"extended"` | Optional glyph set. Defaults to `standard`.   |
-| `font_name` | `str`                        | Optional display name for the generated font. |
 
 Provide exactly one of `prompt` or `image_url`.
 
