@@ -6,17 +6,27 @@ from mixfont import Mixfont, MixfontGenerationError
 
 
 def api_generation(**overrides):
+    created_at = overrides.pop("created_at", "2026-06-02T00:00:00.000Z")
+    poll_url = overrides.pop("poll_url", None)
+    error = overrides.pop("error", None)
     generation = {
-        "id": "gen_123",
-        "status": "queued",
-        "input_type": "text",
-        "glyph_set": "standard",
-        "progress_percent": 0,
-        "fonts": [],
-        "error": None,
-        "created_at": "2026-06-02T00:00:00.000Z",
+        "id": overrides.pop("id", "gen_123"),
+        "name": overrides.pop("name", "Demo"),
+        "ttf_url": overrides.pop("ttf_url", None),
+        "status": overrides.pop("status", "queued"),
+        "input_type": overrides.pop("input_type", "text"),
+        "glyph_set": overrides.pop("glyph_set", "standard"),
+        "progress_percent": overrides.pop("progress_percent", 0),
     }
     generation.update(overrides)
+
+    if poll_url is not None:
+        generation["poll_url"] = poll_url
+
+    if error is not None:
+        generation["error"] = error
+
+    generation["created_at"] = created_at
     return generation
 
 
@@ -42,7 +52,6 @@ class MixfontClientTest(unittest.TestCase):
             calls.append((request, timeout))
             return FakeResponse(
                 api_generation(
-                    credits_charged=15,
                     poll_url="https://api.test/v1/font-generations/gen_123",
                 )
             )
@@ -72,7 +81,20 @@ class MixfontClientTest(unittest.TestCase):
             },
         )
         self.assertEqual(generation["id"], "gen_123")
-        self.assertEqual(generation["credits_charged"], 15)
+        self.assertEqual(
+            list(generation.keys()),
+            [
+                "id",
+                "name",
+                "ttf_url",
+                "status",
+                "input_type",
+                "glyph_set",
+                "progress_percent",
+                "poll_url",
+                "created_at",
+            ],
+        )
 
     def test_creates_image_generation(self):
         calls = []
@@ -118,10 +140,10 @@ class MixfontClientTest(unittest.TestCase):
                 api_generation(
                     status=status,
                     progress_percent=100 if status == "succeeded" else 40,
-                    fonts=(
-                        [{"name": "Demo", "url": "https://static.test/demo.ttf"}]
+                    ttf_url=(
+                        "https://static.test/demo.ttf"
                         if status == "succeeded"
-                        else []
+                        else None
                     ),
                 )
             )
@@ -135,7 +157,21 @@ class MixfontClientTest(unittest.TestCase):
             )
 
         self.assertEqual(generation["status"], "succeeded")
-        self.assertEqual(generation["fonts"][0]["url"], "https://static.test/demo.ttf")
+        self.assertEqual(generation["name"], "Demo")
+        self.assertEqual(generation["ttf_url"], "https://static.test/demo.ttf")
+        self.assertEqual(
+            list(generation.keys()),
+            [
+                "id",
+                "name",
+                "ttf_url",
+                "status",
+                "input_type",
+                "glyph_set",
+                "progress_percent",
+                "created_at",
+            ],
+        )
 
     def test_wait_throws_when_generation_fails(self):
         def fake_urlopen(request, timeout):
