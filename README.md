@@ -1,15 +1,37 @@
-<img src="https://static.mixfont.com/assets/20260604-033721-image-4hk1jdqm.webp" alt="Mixfont banner" width="1280" />
+<p align="center">
+  <img src="https://static.mixfont.com/assets/20260604-033721-image-4hk1jdqm.webp" alt="Mixfont banner" width="1280" />
+</p>
 
-# Official Mixfont Python Client
+<h1 align="center">Official Mixfont Python SDK</h1>
 
-The official Python client for the [Mixfont](https://www.mixfont.com) AI font generation API. It lets you
+<p align="center">
+  State-of-the-art Font Generation Model
+</p>
+
+<p align="center">
+  <a href="https://www.mixfont.com"><img src="https://img.shields.io/badge/Website-mixfont.com-111111" alt="Mixfont website" /></a>
+  <a href="https://github.com/mixfont"><img src="https://img.shields.io/badge/GitHub-mixfont-111111" alt="Mixfont GitHub" /></a>
+  <a href="https://x.com/mixfont"><img src="https://img.shields.io/badge/X-@mixfont-111111" alt="Mixfont on X" /></a>
+</p>
+
+<p align="center">
+  <a href="#examples">Examples</a> |
+  <a href="#supported-platforms">Supported platforms</a> |
+  <a href="#how-font-generation-works">How it works</a> |
+  <a href="#model-inputs-and-outputs">Model inputs</a> |
+  <a href="#usage">Usage</a>
+</p>
+
+<hr />
+
+The official Python SDK for the [Mixfont](https://www.mixfont.com) AI font generation API. It lets you
 create AI-generated font files from Python applications and scripts.
 
 Mixfont is a frontier AI lab developing generative AI for fonts. The Mixfont [font generation](https://www.mixfont.com/font-generator) model creates complete, web-safe TTF font files from a natural-language prompt or a public reference image, so applications can turn generated lettering, sketches, logos, or visual references into editable type instead of a flat image. Fonts generated via the API are unique and licensed for commercial use.
 
 For more information, see the [Mixfont website](https://www.mixfont.com) and the [full Mixfont documentation](https://www.mixfont.com/docs).
 
-<br />
+<hr />
 
 ## Examples
 
@@ -269,3 +291,11 @@ Keep your API key on the server and read it from an environment variable such as
 PYTHONPATH=src python3 -m unittest discover -s tests
 python3 -m build
 ```
+
+<br />
+
+## Links
+
+- [Website](https://www.mixfont.com)
+- [GitHub](https://github.com/mixfont)
+- [X](https://x.com/mixfont)
