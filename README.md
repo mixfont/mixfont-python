@@ -1,4 +1,4 @@
-<img src="./assets/mixfont-banner.webp" alt="Mixfont banner" width="1280" />
+<img src="https://static.mixfont.com/assets/20260604-033721-image-4hk1jdqm.webp" alt="Mixfont banner" width="1280" />
 
 # Mixfont Python client
 
@@ -9,10 +9,85 @@ Mixfont is a frontier AI lab developing generative AI for fonts. The Mixfont [fo
 
 For more information, see the [Mixfont website](https://www.mixfont.com) and the [full Mixfont documentation](https://www.mixfont.com/docs).
 
+<br />
+
+## Examples
+
+These examples show prompt and image inputs paired with generated font files from Mixfont.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left" width="30%">Input</th>
+      <th align="left" width="70%">Generated font preview</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        generate a font for a soccer team logo. Make the letterforms soccer themed, bold, and unique.
+      </td>
+      <td>
+        <img src="https://static.mixfont.com/assets/20260604-035208-image-8ttcinix.webp" alt="Cipher Striker Ultra generated font preview" width="480" /><br />
+        <a href="https://static.mixfont.com/assets/20260603-224831-font-001-cipherstrikerultra-regular-1uj742pz.ttf">Download Cipher-Striker-Ultra.ttf</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://static.mixfont.com/assets/20260603-230108-image-e3prnt68.webp" alt="Wuthering Heights input example" width="220" />
+      </td>
+      <td>
+        <img src="https://static.mixfont.com/assets/20260604-035246-image-l75vnkaz.webp" alt="Wuthering Heights Display generated font preview" width="480" /><br />
+        <a href="https://static.mixfont.com/assets/20260603-230122-font-001-generatedfont-regular-1-yrpido7g.ttf">Download Wuthering-Heights-Display.ttf</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://static.mixfont.com/assets/20260603-210216-image-n06hmmov.webp" alt="Gossamer Editorial Serif input example" width="220" />
+      </td>
+      <td>
+        <img src="https://static.mixfont.com/assets/20260604-035352-image-um7d7s4q.webp" alt="Gossamer Editorial Serif generated font preview" width="480" /><br />
+        <a href="https://static.mixfont.com/assets/20260603-212006-font-001-gossamereditorialserif-regular-1-weyynop8.ttf">Download Gossamer-Editorial-Serif.ttf</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://static.mixfont.com/assets/20260603-225224-image-9sw57q4v.webp" alt="HANDY DAN'S Property Maintanence input example" width="220" />
+      </td>
+      <td>
+        <img src="https://static.mixfont.com/assets/20260604-035258-image-hdz1y9zh.webp" alt="Dystopian Brush Stroke Display generated font preview" width="480" /><br />
+        <a href="https://static.mixfont.com/assets/20260603-225219-font-001-dystopianbrushstrokedisplay-regular-chnivcf8.ttf">Download Dystopian-Brush-Stroke-Display.ttf</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://static.mixfont.com/assets/20260603-230210-image-5lg2741x.webp" alt="NASA logo input example" width="220" />
+      </td>
+      <td>
+        <img src="https://static.mixfont.com/assets/20260604-035311-image-o2w16gf5.webp" alt="Dissonant Wave Sans generated font preview" width="480" /><br />
+        <a href="https://static.mixfont.com/assets/20260603-230230-font-001-dissonantwavesans-regular-z9d7o2ui.ttf">Download Dissonant-Wave-Sans.ttf</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://static.mixfont.com/assets/20260603-230651-image-cgq0gjku.webp" alt="Natural handwriting input example" width="220" />
+      </td>
+      <td>
+        <img src="https://static.mixfont.com/assets/20260604-035322-image-bz6cmt09.webp" alt="Zephyr Ink Script generated font preview" width="480" /><br />
+        <a href="https://static.mixfont.com/assets/20260603-230724-font-001-zephyrinkscript-regular-81hj01mq.ttf">Download Zephyr-Ink-Script.ttf</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
 ## Supported platforms
 
 - Python >= 3.9
 - Standard CPython environments with network access
+
+<br />
 
 ## How font generation works
 
@@ -23,6 +98,8 @@ Font generation is asynchronous. Start a generation with exactly one input:
 
 The create call returns a generation `id` and, when available, a polling URL. Use `mixfont.generations.wait(...)` for built-in polling, or call `mixfont.generations.get(...)` yourself until the status reaches `succeeded`, `failed`, or `cancelled`. When a job succeeds, `ttf_url` contains the generated TTF download URL.
 
+<br />
+
 ## Model inputs and outputs
 
 Use text generation when you can describe the type direction, such as category, style, use case, spacing, contrast, or distinctive details. Use image generation when a visual reference is the clearest source of truth, such as a sketch, sign, logo, poster, screenshot, or existing design mockup.
@@ -31,6 +108,20 @@ Reference images should be publicly reachable HTTPS URLs that point to JPEG, PNG
 
 Generated font files are returned as TTFs. Download or persist the returned `ttf_url` after the job succeeds, then rehost the file in your own storage before using it in production. Returned TTF URLs are temporary and will be deleted within 24 hours.
 
+<br />
+
+## Create an API key
+
+To start making calls to the API you'll need an API key. If you don't already have a Mixfont account, visit [Mixfont](https://www.mixfont.com) and sign in.
+
+Go to the [Developer Console](https://www.mixfont.com/console/keys) to create your first API key. When calling the API, include the key in the `x-api-key` header for each request.
+
+<img src="https://static.mixfont.com/assets/20260602-212442-image-d3bfvtw5.webp" alt="Developer Console Key Creation Flow" width="1280" />
+
+Make sure to copy the API key to a safe place. The API key will only be visible in the dashboard once. If you lose your key, you'll have to create a new one.
+
+<br />
+
 ## Installation
 
 Install it from PyPI:
@@ -38,6 +129,8 @@ Install it from PyPI:
 ```sh
 pip install mixfont
 ```
+
+<br />
 
 ## Usage
 
@@ -90,7 +183,11 @@ generation = mixfont.generations.create(
 )
 ```
 
+<br />
+
 ## API
+
+<br />
 
 ### Constructor
 
@@ -102,6 +199,8 @@ mixfont = Mixfont(api_key, timeout=30.0)
 | ---------- | ------- | -------------------------------------------------------- |
 | `api_key`  | `str`   | Required. Mixfont API key.                               |
 | `timeout`  | `float` | Optional request timeout in seconds. Defaults to `30.0`. |
+
+<br />
 
 ### `mixfont.generations.create(...)`
 
@@ -115,6 +214,8 @@ Starts a new font generation and returns immediately.
 
 Provide exactly one of `prompt` or `image_url`.
 
+<br />
+
 ### Glyph sets
 
 | Glyph set  | Best for                                               | Glyphs | Typical timing |
@@ -124,9 +225,13 @@ Provide exactly one of `prompt` or `image_url`.
 
 `standard` includes English letters, numbers, and basic punctuation. `extended` supports all Latin languages, including special characters, and costs more API credits.
 
+<br />
+
 ### `mixfont.generations.get(generation_id)`
 
 Fetches the current status of a generation.
+
+<br />
 
 ### `mixfont.generations.wait(generation_id, ...)`
 
@@ -140,13 +245,21 @@ Checks the generation until it reaches a terminal status.
 `wait` returns the completed generation when it succeeds. It raises an error if
 the generation fails, is cancelled, or times out.
 
+<br />
+
 ## Best practices
 
-- Write specific prompts that describe the type category, visual style, intended use case, and distinctive details.
-- Start with `standard` when comparing directions, then use `extended` once you have a candidate worth testing more deeply.
-- Store the generation `id`, original prompt or image URL, and `glyph_set` with each result so your team can compare outputs later.
-- Test generated fonts in real content, including headings, numbers, punctuation, labels, and the longest strings your product needs to support.
-- Keep your API key on the server and read it from an environment variable such as `MIXFONT_API_KEY`.
+Write specific prompts that describe the type category, visual style, intended use case, and distinctive details.
+
+Start with `standard` when comparing directions, then use `extended` once you have a candidate worth testing more deeply.
+
+Store the generation `id`, original prompt or image URL, and `glyph_set` with each result so your team can compare outputs later.
+
+Test generated fonts in real content, including headings, numbers, punctuation, labels, and the longest strings your product needs to support.
+
+Keep your API key on the server and read it from an environment variable such as `MIXFONT_API_KEY`.
+
+<br />
 
 ## Development
 
@@ -154,7 +267,3 @@ the generation fails, is cancelled, or times out.
 PYTHONPATH=src python3 -m unittest discover -s tests
 python3 -m build
 ```
-
-## Publishing
-
-See [PUBLISHING.md](./PUBLISHING.md).

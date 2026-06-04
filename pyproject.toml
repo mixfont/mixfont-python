@@ -5,13 +5,13 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "mixfont"
 version = "0.1.0"
-description = "Official Python client for the Mixfont API."
+description = "Official Python client for the Mixfont AI font generation API."
 readme = "README.md"
 requires-python = ">=3.9"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 authors = [{ name = "Mixfont" }]
-keywords = ["mixfont", "font", "generation", "sdk"]
+keywords = ["mixfont", "font", "fonts", "font-generation", "ai-fonts", "typeface", "typography", "sdk", "python"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
