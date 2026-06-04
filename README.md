@@ -1,8 +1,8 @@
 <img src="https://static.mixfont.com/assets/20260604-033721-image-4hk1jdqm.webp" alt="Mixfont banner" width="1280" />
 
-# Mixfont Python client
+# Official Mixfont Python Client
 
-A Python client for the [Mixfont](https://www.mixfont.com) API. It lets you
+The official Python client for the [Mixfont](https://www.mixfont.com) AI font generation API. It lets you
 create AI-generated font files from Python applications and scripts.
 
 Mixfont is a frontier AI lab developing generative AI for fonts. The Mixfont [font generation](https://www.mixfont.com/font-generator) model creates complete, web-safe TTF font files from a natural-language prompt or a public reference image, so applications can turn generated lettering, sketches, logos, or visual references into editable type instead of a flat image. Fonts generated via the API are unique and licensed for commercial use.
@@ -133,6 +133,8 @@ pip install mixfont
 <br />
 
 ## Usage
+
+For the full API documentation, see [Mixfont docs](https://www.mixfont.com/docs).
 
 Import the package:
 
