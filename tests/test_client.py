@@ -15,7 +15,7 @@ def api_generation(**overrides):
         "id": overrides.pop("id", "gen_123"),
         "name": overrides.pop("name", "Demo"),
         "ttf_url": overrides.pop("ttf_url", None),
-        "status": overrides.pop("status", "queued"),
+        "status": overrides.pop("status", "preparing"),
         "input_type": overrides.pop("input_type", "text"),
         "glyph_set": overrides.pop("glyph_set", "standard"),
         "progress_percent": overrides.pop("progress_percent", 0),
@@ -81,6 +81,7 @@ class MixfontClientTest(unittest.TestCase):
             },
         )
         self.assertEqual(generation["id"], "gen_123")
+        self.assertEqual(generation["status"], "preparing")
         self.assertEqual(
             list(generation.keys()),
             [
@@ -130,6 +131,7 @@ class MixfontClientTest(unittest.TestCase):
             generation = client.generations.get("gen_123")
 
         self.assertEqual(generation["id"], "gen_123")
+        self.assertEqual(generation["status"], "preparing")
 
     def test_waits_until_generation_succeeds(self):
         statuses = ["running", "succeeded"]
